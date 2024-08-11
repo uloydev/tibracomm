@@ -2,6 +2,7 @@ const plugin = require("tailwindcss/plugin");
 
 /** @type {import('tailwindcss').Config} */
 export default {
+  mode: 'jit',
   content: [
     "./resources/**/*.blade.php",
     "./resources/**/*.js",
@@ -21,6 +22,12 @@ export default {
       "xl-max": { max: "1200px" },
       "2xl": "1320px",
       "2xl-max": { max: "1320px" },
+      "3xl": "1440px",
+      "3xl-max": { max: "1440px" },
+      "4xl": "1600px",
+      "4xl-max": { max: "1600px" },
+      "5xl": "1920px",
+      "5xl-max": { max: "1920px" },
     },
     colors: ({ colors }) => ({
       inherit: colors.inherit,
@@ -1428,6 +1435,7 @@ export default {
           "line-height": "1.3",
         },
         h3: {
+          // text-lg
           "font-size": "1.875rem",
           "line-height": "1.375",
         },

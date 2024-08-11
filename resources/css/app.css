@@ -5,3 +5,19 @@
 .bg-dark-gradient {
     @apply bg-gradient-to-tl from-gray-900 to-slate-800;
 }
+
+/* .grid-to-right .slider {
+    @apply top-0 left-full w-0 h-full;
+}
+
+.grid-to-left .slider{
+    @apply top-0 right-full w-0 h-full;
+}
+
+.grid-to-top .slider{
+    @apply bottom-full left-0 w-full h-0;
+}
+
+.grid-to-bottom .slider{
+    @apply top-full left-0 w-full h-0;
+} */
