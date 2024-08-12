@@ -6,7 +6,7 @@ export default {
   content: [
     "./resources/**/*.blade.php",
     "./resources/**/*.js",
-    "./resources/**/*.vue",
+    "./resources/**/*.svelte",
   ],
   presets: [],
   darkMode: "class",
@@ -30,6 +30,10 @@ export default {
       "5xl-max": { max: "1920px" },
     },
     colors: ({ colors }) => ({
+      // custom tibra colors
+      tibrablue: "#001AFF",
+      tibrared: "#FF0000",
+
       inherit: colors.inherit,
       current: colors.current,
       transparent: colors.transparent,
