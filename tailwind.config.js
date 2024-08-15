@@ -740,6 +740,7 @@ export default {
       serif: ['SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace', "serif"],
       body: ["Roboto", "sans-serif"],
       awesome: ["FontAwesome"],
+      inter: ["Inter", "sans-serif"],
     },
     fontSize: ({ theme }) => ({
       ...theme("spacing"),
