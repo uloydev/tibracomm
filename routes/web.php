@@ -40,6 +40,7 @@ Route::group(['name' => 'inertia SPA', ], function () {
         $section = Section::where('slug', $slug)->first();
         return Inertia::render('Grid', [
             'gridItems' => SectionItem::where('section_id', $section->id)->get(),
+            'slug' => $slug,
         ]);
     })->name('portfolio-item');
 });

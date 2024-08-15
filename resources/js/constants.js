@@ -1,0 +1,1 @@
+export const GRID_SLIDER_INTERVAL = 2000;

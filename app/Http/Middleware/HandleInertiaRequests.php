@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use App\Models\Section;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -36,7 +37,15 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         return array_merge(parent::share($request), [
-            //
+            "sections" => Section::all()->map(function ($section) {
+                return [
+                    'id' => $section->id,
+                    'name' => $section->name,
+                    'slug' => $section->slug,
+                    'description' => $section->description,
+                    'viewUrl' => route('portfolio-item', ['slug' => $section->slug]),
+                ];
+            }),
         ]);
     }
 }
