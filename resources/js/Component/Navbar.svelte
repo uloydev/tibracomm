@@ -73,7 +73,7 @@
     <ul class=" text-right text-white font-inter text-2xl uppercase">
         {#each sections as section}
             <li class="hover:bg-tibrared hover:font-bold">
-                <a class="block px-10 py-6" href={section.viewUrl} use:inertia
+                <a class="block px-10 py-6" href={section.viewUrl} 
                     >{section.name}</a
                 >
             </li>

@@ -12,7 +12,9 @@ class SectionController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard/sections/index', [
+            'sections' => Section::all(),
+        ]);
     }
 
     /**

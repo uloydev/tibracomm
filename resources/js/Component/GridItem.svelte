@@ -109,12 +109,12 @@
     <div class="w-full h-full relative">
         <div
             class="text-3xl font-bold absolute top-1/2 -translate-y-1/2 overflow-hidden max-h-[40px] group-hover:max-h-full"
-            style="transition: all 1s linear; transition-delay:1s"
+            style="transition: all .3s linear;"
         >
             {item.title}
             <p
                 class="opacity-0 font-normal text-base group-hover:opacity-100"
-                style="transition: all 1s linear; transition-delay:1s"
+                style="transition: all .3s linear;"
             >
                 {item.description}
             </p>
@@ -123,7 +123,7 @@
 </div>
 <div {key} bind:this={carousel}
     class="slider absolute bg-white z-10 {getAnimationClass(item.animation)}"
-    style="transition: all .5s linear"
+    style="transition: all .3s linear"
 >
     {#each item.images as image, i}
         <GridCarouselImage {image} {i} activeIndex={currentSlide} key={key+i}/>

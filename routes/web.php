@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SectionController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\SectionItem;
@@ -13,8 +14,20 @@ Route::get('/grid', function () {
     return view('test-grid');
 });
 
-Route::middleware('auth')->get('/dashboard', function () {
-    return view('dashboard/index');
+Route::name('dashboard.')->prefix('dashboard')->middleware('auth')->group(function () {
+    Route::get('/', function () {
+        return view('dashboard/index');
+    })->name('index');
+
+    // sections crud
+    Route::name('sections.')->prefix('sections')->controller(SectionController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{section}/edit', 'edit')->name('edit');
+        Route::put('/{section}', 'update')->name('update');
+        Route::delete('/{section}', 'destroy')->name('destroy');
+    });
 });
 
 Route::group(['name' => 'inertia SPA', ], function () {

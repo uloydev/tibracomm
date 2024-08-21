@@ -3,10 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.bg-dark-gradient {
-    @apply bg-gradient-to-tl from-gray-900 to-slate-800;
-}
-
 #typewriter .Typewriter__cursor {
     @apply ml-0 relative bg-transparent;
 }

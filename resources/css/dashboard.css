@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.bg-dark-gradient {
+    @apply bg-gradient-to-tl from-gray-900 to-slate-800;
+}
+
+.nav-active a{
+    @apply bg-white text-slate-700 shadow-soft-xl rounded-lg font-semibold;
+}
+
+.nav-active .nav-icon{
+    @apply bg-dark-gradient text-white;
+}
