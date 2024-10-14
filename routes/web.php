@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\SectionItem;
 use App\Models\Section;
+use Illuminate\Support\Facades\View;
 
 // Route::get('/', function () {
 //     return view('home');
@@ -16,7 +17,12 @@ Route::get('/grid', function () {
 
 Route::name('dashboard.')->prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/', function () {
-        return view('dashboard/index');
+        Inertia::share('title', 'Dashboard');
+        Inertia::share('breadcrumbs', [
+            ['name' => 'Dashboard', 'url' => route('dashboard.index')],
+        ]);
+        Inertia::setRootView('dashboard-app');
+        return Inertia::render('Index');
     })->name('index');
 
     // sections crud

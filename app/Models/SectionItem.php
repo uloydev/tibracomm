@@ -27,4 +27,9 @@ class SectionItem extends Model
     protected $casts = [
         'images' => 'array', // Automatically casts JSON column to array
     ];
+
+    public function section()
+    {
+        return $this->belongsTo(Section::class);
+    }
 }

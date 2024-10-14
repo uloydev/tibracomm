@@ -1,6 +1,43 @@
-@extends('layout.dashboard')
+<script>
+    import { inertia, router } from "@inertiajs/svelte";
+    import Swal from "sweetalert2";
+    import Layout from "../Layout.svelte";
 
-@section('content')
+    export let sections = [];
+
+    const deleteConfirmation = (section) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                router.delete(section.delete_url, {
+                    onSuccess: () => deleteSuccess(),
+                });
+            }
+        });
+    };
+
+    const deleteSuccess = () => {
+        Swal.fire({
+            title: "Success!",
+            text: "Section deleted successfully.",
+            icon: "success",
+            confirmButtonText: "Ok",
+            confirmButtonColor: "#3085d6",
+        });
+    };
+</script>
+
+
+<Layout>
+
+    
     <div class="w-full max-w-full px-3 mt-0 mb-6">
         <div
             class="border-black/12.5 shadow-soft-xl relative flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-white bg-clip-border">
@@ -28,7 +65,7 @@
                                 <li
                                     class="relative group rounded-lg hover:bg-gradient-to-tl hover:from-gray-900 hover:to-slate-800">
                                     <a class="py-1.2 lg:ease-soft clear-both block w-full whitespace-nowrap rounded-lg border-0 bg-transparent px-4 text-left font-normal text-slate-500 lg:transition lg:duration-300 group-hover:text-white group-hover:font-bold"
-                                        href="javascript:;">Create</a>
+                                        href="/dashboard/sections/create" use:inertia>Create</a>
                                 </li>
                                 <li
                                     class="relative group rounded-lg hover:bg-gradient-to-tl hover:from-gray-900 hover:to-slate-800">
@@ -60,23 +97,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($sections as $section)
+                            {#each sections as section}
                                 <tr class="text-sm text-slate-600 hover:bg-slate-50">
                                     <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap text-slate-800">
-                                        <h6 class="mb-0 leading-normal px-4">{{ $section->name }}</h6>
+                                        <h6 class="mb-0 leading-normal px-4">{section.name}</h6>
                                     </td>
                                     <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap">
-                                        <p class="mb-0 leading-normal text-sm text-ellipsis">{{ $section->description }}</p>
+                                        <p class="mb-0 leading-normal text-sm text-ellipsis">{section.description }</p>
                                     </td>
                                     <td
                                         class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap">
-                                        <p class="mb-0 leading-normal text-sm font-bold">{{ $section->items_count }}</p>
+                                        <p class="mb-0 leading-normal text-sm font-bold">{ section.items_count }</p>
 
                                     </td>
                                     <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap">
                                         <div class="flex justify-center text-lg gap-x-4">
                                             <div>
-                                                <a href="{{ route('portfolio-item', $section->slug) }}"
+                                                <a href="{section.view_url}"
                                                     class="hover:bg-gradient-to-tl hover:from-gray-900 hover:to-slate-800 hover:text-white px-2 py-1 rounded-2 hover:shadow-lg" data-placement="top"
                                                     data-target="tooltip_trigger">
                                                     <i class='bx bxs-show'></i>
@@ -90,7 +127,7 @@
                                                 </div>
                                             </div>
                                             <div>
-                                                <a href="{{ route('dashboard.sections.edit', $section->id) }}"
+                                                <a href="{section.edit_url}" use:inertia
                                                     class="hover:bg-gradient-to-tl hover:from-gray-900 hover:to-slate-800 hover:text-white px-2 py-1 rounded-2 hover:shadow-lg" data-placement="top"
                                                     data-target="tooltip_trigger">
                                                     <i class='bx bx-edit'></i>
@@ -104,11 +141,11 @@
                                                 </div>
                                             </div>
                                             <div>
-                                                <a href="{{ route('dashboard.sections.edit', $section->id) }}"
+                                                <button on:click={() => deleteConfirmation(section)}
                                                     class="hover:bg-gradient-to-tl hover:from-gray-900 hover:to-slate-800 hover:text-white px-2 py-1 rounded-2 hover:shadow-lg" data-placement="top"
                                                     data-target="tooltip_trigger">
                                                     <i class='bx bx-trash'></i>
-                                                </a>
+                                                </button>
                                                 <div class="z-50 hidden px-2 py-1 text-center text-white bg-dark-gradient rounded-lg max-w-46 text-sm"
                                                     id="tooltip" role="tooltip" data-target="tooltip">
                                                     delete
@@ -120,16 +157,11 @@
                                         </div>
                                     </td>
                                 </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="4" class="text-center">No sections found</td>
-                                </tr>
-                            @endforelse
-
+                            {/each}
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-@endsection
+</Layout>

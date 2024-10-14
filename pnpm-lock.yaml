@@ -17,6 +17,9 @@ importers:
       svelte:
         specifier: ^4.2.11
         version: 4.2.18
+      sweetalert2:
+        specifier: ^11.14.1
+        version: 11.14.1
       typewriter-effect:
         specifier: ^2.21.0
         version: 2.21.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -984,6 +987,9 @@ packages:
     resolution: {integrity: sha512-d0FdzYIiAePqRJEb90WlJDkjUEx42xhivxN8muUBmfZnP+tzUgz12DJ2hRJi8sIHCME7jeK1PTMgKPSfTd8JrA==}
     engines: {node: '>=16'}
 
+  sweetalert2@11.14.1:
+    resolution: {integrity: sha512-xadhfcA4STGMh8nC5zHFFWURhRpWc4zyI3GdMDFH/m3hGWZeQQNWhX9xcG4lI9gZYsi/IlazKbwvvje3juL3Xg==}
+
   tailwindcss@3.4.8:
     resolution: {integrity: sha512-GkP17r9GQkxgZ9FKHJQEnjJuKBcbFhMFzKu5slmN6NjlCuFnYJMQ8N4AZ6VrUyiRXlDtPKHkesuQ/MS913Nvdg==}
     engines: {node: '>=14.0.0'}
@@ -1887,6 +1893,8 @@ snapshots:
       locate-character: 3.0.0
       magic-string: 0.30.11
       periscopic: 3.1.0
+
+  sweetalert2@11.14.1: {}
 
   tailwindcss@3.4.8:
     dependencies:

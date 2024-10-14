@@ -4,16 +4,43 @@ namespace App\Http\Controllers;
 
 use App\Models\Section;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
+use Inertia\Inertia;
+use Illuminate\Support\Str;
+
+use function Psy\debug;
 
 class SectionController extends Controller
 {
+    public function __construct()
+    {
+        Inertia::share('breadcrumbs', [
+            ['name' => 'Sections', 'url' => route('dashboard.sections.index')],
+        ]);
+        Inertia::setRootView('dashboard-app');
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('dashboard/sections/index', [
-            'sections' => Section::all(),
+        // check session success and pass to inertia
+        if (session('success')) {
+            Inertia::share('success', session('success'));
+        }
+        Inertia::share('title', 'Section List');
+        $sections = Section::withCount('items')->get();
+
+        $sections->transform(function ($section) {
+            $section->view_url = route('portfolio-item', $section->slug);
+            $section->edit_url = route('dashboard.sections.edit', $section->id);
+            $section->delete_url = route('dashboard.sections.destroy', $section->id);
+            return $section;
+        });
+
+        return Inertia::render('Sections/Index', [
+            'sections' => $sections,
         ]);
     }
 
@@ -22,7 +49,8 @@ class SectionController extends Controller
      */
     public function create()
     {
-        //
+        Inertia::share('title', 'Create Section');
+        return Inertia::render('Sections/Create');
     }
 
     /**
@@ -30,7 +58,16 @@ class SectionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        $data['slug'] = Str::slug($data['name']);
+
+        Section::create($data);
+
+        return redirect()->route('dashboard.sections.index')->with('success', 'Section created successfully');
     }
 
     /**
@@ -44,9 +81,13 @@ class SectionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Section $section)
+    public function edit($section)
     {
-        //
+        $section = Section::with('items')->find($section);
+        Inertia::share('title', 'Edit Section');
+        return Inertia::render('Sections/Edit', [
+            'section' => $section,
+        ]);
     }
 
     /**
@@ -62,6 +103,9 @@ class SectionController extends Controller
      */
     public function destroy(Section $section)
     {
-        //
+        // delete section items and section
+        $section->items()->delete();
+        $section->delete();
+        return redirect()->route('dashboard.sections.index');
     }
 }
