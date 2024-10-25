@@ -42,9 +42,8 @@ class SectionSeeder extends Seeder
             $items[] = [
                 'section_id' => $sectionId,
                 'title' => $this->faker->sentence(3),
-                'animation' => $this->faker->randomElement(
-                    $this->getAvaliableAnimations($colStart, $rowStart)
-                ),
+                'animation' => $this->getAvaliableAnimations($colStart, $rowStart),
+                'mobileAnimation' => $this->getAvailableMobileAnimations($i),
                 'bgColor' => $this->faker->hexColor(),
                 'textColor' => '#000000',
                 'colSpan' => 1,
@@ -60,7 +59,8 @@ class SectionSeeder extends Seeder
         return $items;
     }
 
-    private function getSections($count) {
+    private function getSections($count)
+    {
         $sections = [];
         for ($i = 1; $i <= $count; $i++) {
             $name = $this->faker->sentence(3);
@@ -76,7 +76,7 @@ class SectionSeeder extends Seeder
         return $sections;
     }
 
-    private function getAvaliableAnimations($colStart, $rowStart) 
+    private function getAvaliableAnimations($colStart, $rowStart)
     {
         $rowAnimationMap = [
             1 => 'grid-to-bottom',
@@ -85,11 +85,30 @@ class SectionSeeder extends Seeder
 
         $colAnimationMap = [
             1 => ['grid-to-right'],
-            2 => ['grid-to-left','grid-to-right'],
+            2 => ['grid-to-left', 'grid-to-right'],
             3 => ['grid-to-left'],
         ];
 
-        return [$rowAnimationMap[$rowStart], ...$colAnimationMap[$colStart]];
+        return $this->faker->randomElement([
+            $rowAnimationMap[$rowStart],
+            ...$colAnimationMap[$colStart]
+        ]);
+    }
+
+    private function getAvailableMobileAnimations($index)
+    {
+        $animations = [
+            "mobile-grid-to-top",
+            "mobile-grid-to-bottom",
+        ];
+
+        if ($index == 0) {
+            return $animations[0];
+        } else if ($index == 5) {
+            return $animations[1];
+        }
+
+        return $this->faker->randomElement($animations);
     }
 
     private function getImages($count = 5)

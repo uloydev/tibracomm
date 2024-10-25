@@ -13,6 +13,7 @@ class SectionItem extends Model
         'section_id',
         'title',
         'animation',
+        'mobileAnimation',
         'bgColor',
         'textColor',
         'colSpan',

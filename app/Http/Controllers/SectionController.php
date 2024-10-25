@@ -85,6 +85,7 @@ class SectionController extends Controller
     {
         $section = Section::with('items')->find($section);
         Inertia::share('title', 'Edit Section');
+        Inertia::share('sectionID', $section->id);
         return Inertia::render('Sections/Edit', [
             'section' => $section,
         ]);

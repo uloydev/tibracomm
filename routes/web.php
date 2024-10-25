@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\SectionController;
+use App\Http\Controllers\SectionItemController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\SectionItem;
@@ -33,6 +34,12 @@ Route::name('dashboard.')->prefix('dashboard')->middleware('auth')->group(functi
         Route::get('/{section}/edit', 'edit')->name('edit');
         Route::put('/{section}', 'update')->name('update');
         Route::delete('/{section}', 'destroy')->name('destroy');
+        // sections items crud
+        Route::name('items.')->prefix('{section}/items')->controller(SectionItemController::class)->group(function () {
+            Route::delete('/{sectionItem}', 'destroy')->name('destroy');
+            Route::post('/', 'store')->name('store');
+            Route::put('/{sectionItem}', 'update')->name('update');
+        });
     });
 });
 

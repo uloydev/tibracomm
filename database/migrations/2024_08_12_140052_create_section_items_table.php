@@ -16,10 +16,10 @@ return new class extends Migration
             $table->foreignId('section_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->string('animation')->nullable();
-            $table->string('bgColor');
-            $table->string('textColor');
-            $table->integer('colSpan')->default(1);
-            $table->integer('rowSpan')->default(1);
+            $table->string('bgColor')->nullable();
+            $table->string('textColor')->nullable();
+            $table->integer('colSpan');
+            $table->integer('rowSpan');
             $table->integer('colStart');
             $table->integer('rowStart');
             $table->boolean('isCarousel')->default(false);
