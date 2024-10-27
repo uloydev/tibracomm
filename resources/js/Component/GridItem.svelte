@@ -8,6 +8,7 @@
      * @property {number} section_id
      * @property {string} title
      * @property {string} [animation]
+     * @property {string} [mobileAnimation]
      * @property {string} bgColor
      * @property {string} textColor
      * @property {number} colSpan
@@ -24,7 +25,9 @@
     export let key;
     let carousel;
     let currentSlide = 0;
+    let mobileItemClicked = false;
 
+    let isScreenSmall = window.innerWidth < 640;
 
     const slideXMouseEnter = (e) => {
         carousel.classList.replace("w-0", "w-full");
@@ -42,7 +45,22 @@
         carousel.classList.replace("h-full", "h-0");
     };
 
+    const toggleMobileSlideY = (e) => {
+        // check if it has h-full class
+        mobileItemClicked = !mobileItemClicked;
+        if (!mobileItemClicked) {
+            console.log("unclicked");
+            carousel.classList.replace("h-full", "h-0");
+        } else {
+            console.log("clicked");
+            carousel.classList.replace("h-0", "h-full");
+        }
+    };
+
     const getMouseEnterHandler = (animation) => {
+        if (isScreenSmall) {
+            return () => {};
+        }
         switch (animation) {
             case "grid-to-right":
                 return slideXMouseEnter;
@@ -58,6 +76,9 @@
     };
 
     const getMouseLeaveHandler = (animation) => {
+        if (isScreenSmall) {
+            return () => {};
+        }
         switch (animation) {
             case "grid-to-right":
                 return slideXMouseLeave;
@@ -87,7 +108,62 @@
         }
     };
 
+    const getMobileAnimationClass = (animation) => {
+        switch (animation) {
+            case "mobile-grid-to-top":
+                return "bottom-full left-0 w-full h-0";
+            case "mobile-grid-to-bottom":
+                return "top-full left-0 w-full h-0";
+            default:
+                return "";
+        }
+    };
+
+    const toggleMobileAnimation = (animation) => {
+        if (!isScreenSmall) {
+            console.log("not small");
+            return () => {};
+        }
+        switch (animation) {
+            case "mobile-grid-to-top":
+                return toggleMobileSlideY;
+            case "mobile-grid-to-bottom":
+                return toggleMobileSlideY;
+            default:
+                return () => {};
+        }
+    };
+
     let interval;
+
+    // update isScreenSmall on window resize
+    window.addEventListener("resize", () => {
+        isScreenSmall = window.innerWidth < 640;
+        if (mobileItemClicked) {
+            mobileItemClicked = false;
+        }
+    });
+
+    let animation;
+    let animationClass;
+    let groupHoverHeightClass;
+    let groupHoverOpacityClass;
+    $: {
+        animationClass = isScreenSmall
+            ? getMobileAnimationClass(item.mobileAnimation)
+            : getAnimationClass(item.animation);
+        animation = isScreenSmall ? item.mobileAnimation : item.animation;
+        groupHoverHeightClass = isScreenSmall
+            ? mobileItemClicked
+                ? "max-h-full h-full"
+                : "h-[40px]"
+            : "group-hover:max-h-full";
+        groupHoverOpacityClass = isScreenSmall
+            ? mobileItemClicked
+                ? "opacity-100"
+                : "opacity-0"
+            : "group-hover:opacity-100";
+    }
 
     onMount(() => {
         interval = setInterval(() => {
@@ -101,19 +177,22 @@
 </script>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<div {key}
-    class="{item.animation} group p-20 h-full flex items-center"
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div
+    {key}
+    class="{animation} group p-4 sm:p-20 h-full aspect-video sm:aspect-auto flex items-center"
     on:mouseenter={getMouseEnterHandler(item.animation)}
     on:mouseleave={getMouseLeaveHandler(item.animation)}
+    on:click={toggleMobileAnimation(item.mobileAnimation)}
 >
     <div class="w-full h-full relative">
         <div
-            class="text-3xl font-bold absolute top-1/2 -translate-y-1/2 overflow-hidden max-h-[40px] group-hover:max-h-full"
+            class="text-xl sm:text-3xl font-bold absolute top-1/2 -translate-y-1/2 overflow-hidden sm:max-h-[40px] {groupHoverHeightClass}"
             style="transition: all .3s linear;"
         >
             {item.title}
             <p
-                class="opacity-0 font-normal text-base group-hover:opacity-100"
+                class="opacity-0 font-normal text-base {groupHoverOpacityClass}"
                 style="transition: all .3s linear;"
             >
                 {item.description}
@@ -121,11 +200,18 @@
         </div>
     </div>
 </div>
-<div {key} bind:this={carousel}
-    class="slider absolute bg-white z-10 {getAnimationClass(item.animation)}"
+<div
+    {key}
+    bind:this={carousel}
+    class="slider absolute bg-white z-10 {animationClass}"
     style="transition: all .3s linear"
 >
     {#each item.images as image, i}
-        <GridCarouselImage {image} {i} activeIndex={currentSlide} key={key+i}/>
+        <GridCarouselImage
+            {image}
+            {i}
+            activeIndex={currentSlide}
+            key={key + i}
+        />
     {/each}
 </div>

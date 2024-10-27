@@ -30,26 +30,26 @@
     }
 
     const colSpanMap = {
-        1: "col-span-1",
-        2: "col-span-2",
-        3: "col-span-3",
+        1: "sm:col-span-1",
+        2: "smcol-span-2",
+        3: "smcol-span-3",
     };
 
     const rowSpanMap = {
-        1: "row-span-1",
-        2: "row-span-2",
+        1: "sm:row-span-1",
+        2: "sm:row-span-2",
     };
 
     const colStartMap = {
-        1: "col-start-1",
-        2: "col-start-2",
-        3: "col-start-3",
+        1: "sm:col-start-1",
+        2: "sm:col-start-2",
+        3: "sm:col-start-3",
     };
 
     const rowStartMap = {
-        1: "row-start-1",
-        2: "row-start-2",
-        3: "row-start-3",
+        1: "sm:row-start-1",
+        2: "sm:row-start-2",
+        3: "sm:row-start-3",
     };
 
     const getGridItemClasses = (item) => {
@@ -63,7 +63,7 @@
 </script>
 
 <HomeLayout overrideClasses="h-screen w-full relative overflow-x-hidden" fixedNavbar=true>
-    <div key={slug} class="grid grid-cols-3 grid-rows-2 h-full w-full cursor-default">
+    <div key={slug} class="grid sm:grid-cols-3 sm:grid-rows-2 h-full w-full cursor-default">
         {#each gridItems as item}
             <div
                 class="relative {getGridItemClasses(item)}"

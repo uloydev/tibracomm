@@ -36,7 +36,7 @@
     });
 </script>
 
-<div {key} class="slider relative bg-white w-full h-full">
+<div {key} class="slider relative bg-white w-full h-full aspect-video sm:aspect-auto">
     {#each item.images as image, i}
         <GridCarouselImage {image} {i} activeIndex={currentSlide} key={key+i}/>
     {/each}
