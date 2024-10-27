@@ -193,11 +193,10 @@
                     forceFormData: true,
                 });
             }
+        }).finally(() => {
+            resetState();
+            showModal = false;
         });
-
-        resetState();
-
-        showModal = false;
     };
 </script>
 

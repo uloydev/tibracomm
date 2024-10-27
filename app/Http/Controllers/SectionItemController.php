@@ -129,7 +129,7 @@ class SectionItemController extends Controller
             foreach ($request->file('newImages') as $newImage) {
                 // save the image
                 $newImage->store('public/section-items');
-                $data['images'][] = '/storage/section-items/' . $newImage->hashName();
+                array_push($data['images'], '/storage/section-items/' . $newImage->hashName());
             }
         }
         $sectionItem->update([
@@ -143,7 +143,7 @@ class SectionItemController extends Controller
             'colStart' => $data['colStart'],
             'rowStart' => $data['rowStart'],
             'isCarousel' => $data['isCarousel'],
-            'images' => $data['images'],
+            'images' => array_values($data['images']),
             'description' => $data['description'] ?? null,
         ]);
         return redirect()->back()->with('success', 'Section item updated successfully');
