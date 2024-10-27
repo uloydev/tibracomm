@@ -23,9 +23,7 @@
     });
 
     let fixedClass = "";
-    $: {
-        fixedClass = fixed ? "fixed top-0 z-10" : "";
-    }
+    $: fixedClass = fixed ? "fixed top-0" : "";
 
     let sidebarOpen = false;
     let showLogo = false;
@@ -43,7 +41,7 @@
     };
 </script>
 
-<nav class="w-full h-20 bg-tibrablue font-inter overflow-x-hidden {fixedClass}">
+<nav class="w-full h-20 bg-tibrablue font-inter overflow-x-hidden fixed top-0 z-20 ">
     <div class="h-full flex justify-between items-center overflow-hidden">
         <!-- svelte-ignore a11y-no-static-element-interactions -->
         <div
@@ -95,15 +93,15 @@
     </div>
 </nav>
 <div
-    class="absolute z-10 bottom-0 w-full sm:w-1/4 h-[calc(100%-5rem)] bg-tibrablue {sidebarOpen
-        ? 'right-0'
-        : '-right-full sm:-right-1/4'}"
-    style="transition: all .2s linear;"
+    class="absolute z-10 sm:bottom-0 w-full sm:w-1/4 sm:h-[calc(100vh-5rem)] bg-tibrablue {sidebarOpen
+        ? 'top-[5rem] sm:right-0'
+        : '-top-full sm:top-[5rem] sm:-right-1/4'}"
+    style="transition: all .5s linear;"
 >
-    <ul class=" text-right text-white font-inter text-xl sm:text-2xl uppercase">
+    <ul class=" text-center sm:text-right text-white font-inter text-xl sm:text-2xl uppercase">
         {#each sections as section}
             <li class="hover:bg-tibrared hover:font-bold">
-                <a class="block px-10 py-6" href={section.viewUrl}
+                <a class="block px-10 py-4 sm:py-6" href={section.viewUrl}
                     >{section.name}</a
                 >
             </li>

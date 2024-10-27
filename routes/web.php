@@ -18,12 +18,13 @@ Route::get('/grid', function () {
 
 Route::name('dashboard.')->prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/', function () {
-        Inertia::share('title', 'Dashboard');
-        Inertia::share('breadcrumbs', [
-            ['name' => 'Dashboard', 'url' => route('dashboard.index')],
-        ]);
-        Inertia::setRootView('dashboard-app');
-        return Inertia::render('Index');
+        // Inertia::share('title', 'Dashboard');
+        // Inertia::share('breadcrumbs', [
+        //     ['name' => 'Dashboard', 'url' => route('dashboard.index')],
+        // ]);
+        // Inertia::setRootView('dashboard-app');
+        // return Inertia::render('Index');
+        return redirect("dashboard/sections");
     })->name('index');
 
     // sections crud

@@ -31,8 +31,8 @@
 
     const colSpanMap = {
         1: "sm:col-span-1",
-        2: "smcol-span-2",
-        3: "smcol-span-3",
+        2: "sm:col-span-2",
+        3: "sm:col-span-3",
     };
 
     const rowSpanMap = {

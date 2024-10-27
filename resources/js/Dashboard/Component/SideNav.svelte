@@ -2,24 +2,24 @@
     import { inertia } from "@inertiajs/svelte";
     import { onMount } from "svelte";
     const routes = [
-        {
-            name: "Dashboard",
-            icon: "bx bxs-dashboard",
-            href: "/dashboard",
-            isAbsolute: true,
-        },
+        // {
+        //     name: "Dashboard",
+        //     icon: "bx bxs-dashboard",
+        //     href: "/dashboard",
+        //     isAbsolute: true,
+        // },
         {
             name: "Sections",
             icon: "bx bx-food-menu",
             href: "/dashboard/sections",
             isAbsolute: false,
         },
-        {
-            name: "Settings",
-            icon: "bx bx-cog",
-            href: "/dashboard/settings",
-            isAbsolute: false,
-        },
+        // {
+        //     name: "Settings",
+        //     icon: "bx bx-cog",
+        //     href: "/dashboard/settings",
+        //     isAbsolute: false,
+        // },
     ];
     let currentRoute = "";
 
