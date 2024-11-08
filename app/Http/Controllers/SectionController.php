@@ -96,7 +96,16 @@ class SectionController extends Controller
      */
     public function update(Request $request, Section $section)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        $data['slug'] = Str::slug($data['name']);
+
+        $section->update($data);
+
+        return redirect()->route('dashboard.sections.index')->with('success', 'Section updated successfully');
     }
 
     /**
