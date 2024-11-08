@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // append to web middleware
         $middleware->web([
             \App\Http\Middleware\HandleInertiaRequests::class,
+			\Spatie\Csp\AddCspHeaders::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
