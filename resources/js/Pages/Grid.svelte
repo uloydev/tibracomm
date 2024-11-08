@@ -63,7 +63,7 @@
 </script>
 
 <HomeLayout overrideClasses="h-screen w-full relative overflow-x-hidden" fixedNavbar=true>
-    <div key={slug} class="grid sm:grid-cols-3 sm:grid-rows-2 h-full w-full cursor-default">
+    <div key={slug} class="grid sm:grid-cols-3 sm:grid-rows-2 h-full w-full cursor-default font-inter">
         {#each gridItems as item}
             <div
                 class="relative {getGridItemClasses(item)}"
