@@ -148,6 +148,7 @@
     let animationClass;
     let groupHoverHeightClass;
     let groupHoverOpacityClass;
+    let groupOverflowClass;
     $: {
         animationClass = isScreenSmall
             ? getMobileAnimationClass(item.mobileAnimation)
@@ -156,13 +157,18 @@
         groupHoverHeightClass = isScreenSmall
             ? mobileItemClicked
                 ? "max-h-full h-full"
-                : "h-[40px]"
+                : "h-full"
             : "group-hover:max-h-full";
         groupHoverOpacityClass = isScreenSmall
             ? mobileItemClicked
-                ? "opacity-100"
-                : "opacity-0"
-            : "group-hover:opacity-100";
+                ? "opacity-100 h-[30%] max-h-[30%]"
+                : "opacity-0 max-h-0"
+            : "group-hover:opacity-100 group-hover:h-[30%] group-hover:max-h-[30%]";
+        groupOverflowClass = isScreenSmall
+            ? mobileItemClicked
+                ? "overflow-y-auto"
+                : ""
+            : "group-hover:overflow-y-auto";
     }
 
     onMount(() => {
@@ -180,23 +186,25 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
     {key}
-    class="{animation} group p-4 sm:p-20 h-full aspect-video sm:aspect-auto flex items-center"
+    class="{animation} group p-4 sm:p-8 2xl:p-12 h-full aspect-video sm:aspect-auto flex items-center"
     on:mouseenter={getMouseEnterHandler(item.animation)}
     on:mouseleave={getMouseLeaveHandler(item.animation)}
     on:click={toggleMobileAnimation(item.mobileAnimation)}
 >
-    <div class="w-full h-full relative">
-        <div
-            class="text-xl sm:text-3xl font-bold absolute top-1/2 -translate-y-1/2 overflow-hidden sm:max-h-[40px] {groupHoverHeightClass}"
-            style="transition: all .3s linear;"
-        >
-            {item.title}
-            <p
-                class="opacity-0 font-normal text-base {groupHoverOpacityClass}"
+    <div class="w-full h-full relative overflow-hidden {groupOverflowClass}">
+        <div class="w-full h-full absolute top-1/2 -translate-y-1/2">
+            <div
+                class="text-xl sm:text-3xl w-full h-full font-bold flex flex-col justify-center {groupHoverHeightClass}"
                 style="transition: all .3s linear;"
             >
-                {item.description}
-            </p>
+                {item.title}
+                <p
+                    class=" flex-none mt-2 opacity-0 font-normal text-base h-0 {groupHoverOpacityClass}"
+                    style="transition: all .3s linear;"
+                >
+                    {item.description}
+                </p>
+            </div>
         </div>
     </div>
 </div>
