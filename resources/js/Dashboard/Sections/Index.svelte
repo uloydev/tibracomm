@@ -67,11 +67,11 @@
                                     <a class="py-1.2 lg:ease-soft clear-both block w-full whitespace-nowrap rounded-lg border-0 bg-transparent px-4 text-left font-normal text-slate-500 lg:transition lg:duration-300 group-hover:text-white group-hover:font-bold"
                                         href="/dashboard/sections/create" use:inertia>Create</a>
                                 </li>
-                                <li
+                                <!-- <li
                                     class="relative group rounded-lg hover:bg-gradient-to-tl hover:from-gray-900 hover:to-slate-800">
                                     <a class="py-1.2 lg:ease-soft clear-both block w-full whitespace-nowrap rounded-lg border-0 bg-transparent px-4 text-left font-normal text-slate-500 lg:transition lg:duration-300 group-hover:text-white group-hover:font-bold"
                                         href="javascript:;">Export</a>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                     </div>
