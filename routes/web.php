@@ -6,11 +6,20 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\SectionItem;
 use App\Models\Section;
-use Illuminate\Support\Facades\View;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 // Route::get('/', function () {
 //     return view('home');
 // });
+
+Route::get('/storage-link', function (Request $request) {
+    if ($request->has('token') && $request->token === 'Tibracomm2024') {
+        Artisan::call('storage:link');
+        return 'Storage link created';
+    }
+    return 'Invalid token';
+});
 
 Route::get('/grid', function () {
     return view('test-grid');
