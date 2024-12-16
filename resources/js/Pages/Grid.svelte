@@ -23,6 +23,7 @@
     /**
      * @type {GridItem[]}
      */
+    export let finishedLoading = false;
     export let gridItems = [];
     export let slug = "";
     $: {
