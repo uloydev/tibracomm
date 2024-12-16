@@ -1,34 +1,34 @@
 {
-  "_index-vqInE3O7.js": {
-    "file": "assets/index-vqInE3O7.js",
+  "_index-DNXXkUqb.js": {
+    "file": "assets/index-DNXXkUqb.js",
     "name": "index"
   },
   "resources/css/app.css": {
-    "file": "assets/app-C-DLiW4A.css",
+    "file": "assets/app-CaWiaiVe.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/css/dashboard.css": {
-    "file": "assets/dashboard-CrgPQLFb.css",
+    "file": "assets/dashboard-CnpfSvUQ.css",
     "src": "resources/css/dashboard.css",
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-ChJQtCmN.js",
+    "file": "assets/app-DJJuWdU6.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "imports": [
-      "_index-vqInE3O7.js"
+      "_index-DNXXkUqb.js"
     ]
   },
   "resources/js/dashboard.js": {
-    "file": "assets/dashboard-DQVG3xjZ.js",
+    "file": "assets/dashboard-CDyfYdAj.js",
     "name": "dashboard",
     "src": "resources/js/dashboard.js",
     "isEntry": true,
     "imports": [
-      "_index-vqInE3O7.js"
+      "_index-DNXXkUqb.js"
     ],
     "css": [
       "assets/dashboard-B_SY1GJM.css"
